@@ -1,0 +1,8 @@
+### CMake ###
+CMakeCache.txt
+CMakeFiles
+Makefile
+cmake_install.cmake
+
+#exe
+PROJECT_NAME_HERE_CHANGE_ME
