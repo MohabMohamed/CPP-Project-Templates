@@ -9,7 +9,7 @@ int main() {
     settings.antialiasingLevel = 4;
     settings.majorVersion = 3;
     settings.minorVersion = 0;
-    sf::Window window(sf::VideoMode(800, 600), "OpenGL", sf::Style::Default, settings);
+    sf::Window window(sf::VideoMode(1280, 720), "OpenGL", sf::Style::Default, settings);
     window.setFramerateLimit(60);
 
     if (!gladLoadGL()) {
