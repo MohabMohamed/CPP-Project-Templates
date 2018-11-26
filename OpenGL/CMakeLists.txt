@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.1)
 
-project(PROJECT_NAME_HERE_CHANGE_ME)
+project(gl_prac)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_LIBRARIES -lstdc++fs)
 set(CMAKE_CXX_FLAGS "-Wall -Wextra")
@@ -17,6 +17,7 @@ include_directories(src/Dependencies/)
 #Add files
 set(SOURCES 
     src/Main.cpp
+    src/ShaderLoader.cpp
     src/Glad/glad.c
 )
 
