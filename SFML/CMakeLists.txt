@@ -14,6 +14,7 @@ find_package(SFML REQUIRED audio network graphics window system)
 #Add files
 set(SOURCES 
     src/Main.cpp
+    src/Input/Keyboard.cpp
 )
 
 #Define the executable

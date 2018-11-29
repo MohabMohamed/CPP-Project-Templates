@@ -19,6 +19,7 @@ set(SOURCES
     src/Main.cpp
     src/ShaderLoader.cpp
     src/Glad/glad.c
+    src/Input/Keyboard.cpp
 )
 
 #Define the executable
