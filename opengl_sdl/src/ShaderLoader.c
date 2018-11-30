@@ -1,52 +1,42 @@
 #include "ShaderLoader.h"
 
-namespace
+static GLuint compileShader(const GLchar* source, GLenum shaderType)
 {
-    GLuint compileShader(const GLchar* source, GLenum shaderType)
+    auto shaderID = glCreateShader(shaderType);
+    glShaderSource(shaderID, 1, &source, NULL);
+    glCompileShader(shaderID);
+    GLint isSuccess = 0;
+    GLchar infoLog[512];
+    glGetShaderiv(shaderID, GL_COMPILE_STATUS, &isSuccess);
+    if(!isSuccess)
     {
-        auto shaderID = glCreateShader(shaderType);
-
-        glShaderSource(shaderID, 1, &source, nullptr);
-        glCompileShader(shaderID);
-
-        GLint isSuccess = 0;
-        GLchar infoLog[512];
-
-        glGetShaderiv(shaderID, GL_COMPILE_STATUS, &isSuccess);
-        if(!isSuccess)
-        {
-            glGetShaderInfoLog(shaderID, 512, nullptr, infoLog);
-            throw std::runtime_error ("Unable to load a shader: " + std::string(infoLog));
-        }
-
-        return shaderID;
+        glGetShaderInfoLog(shaderID, 512, 1, infoLog);
+        exit(1);
     }
+    return shaderID;
+}
 
-    GLuint linkProgram(GLuint vertexShaderID, GLuint fragmentShaderID)
+static GLuint linkProgram(GLuint vertexShaderID, GLuint fragmentShaderID)
+{
+    auto id = glCreateProgram();
+    glAttachShader(id, vertexShaderID);
+    glAttachShader(id, fragmentShaderID);
+    glLinkProgram(id);
+    return id;
+}
+
+static char* getFileContents(const char* filePath)
+{
+    /*
+    std::ifstream inFile(filePath);
+    if(!inFile.is_open())
     {
-        auto id = glCreateProgram();
-
-        glAttachShader(id, vertexShaderID);
-        glAttachShader(id, fragmentShaderID);
-
-        glLinkProgram(id);
-
-        return id;
+        throw std::runtime_error("Unable to open file: " + filePath);
     }
-
-    std::string getFileContents(const std::string& filePath)
-    {
-        std::ifstream inFile(filePath);
-        if(!inFile.is_open())
-        {
-            throw std::runtime_error("Unable to open file: " + filePath);
-        }
-
-        std::stringstream stream;
-
-        stream << inFile.rdbuf();
-        return stream.str();
-    }
+    std::stringstream stream;
+    stream << inFile.rdbuf();
+    return stream.str();
+    */
 }
 
 GLuint createShaderProgram(
