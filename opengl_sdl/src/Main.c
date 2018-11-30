@@ -33,8 +33,26 @@ int main() {
         kill("Cannot load opengl");
     }
 
+    int8_t running = 1;
+    while (running) {
+        SDL_Event event;
+        while (SDL_PollEvent(&event)) {
+            switch (event.type) {
+                case SDL_WINDOWEVENT:
+                    switch (event.window.event) {
+                        case SDL_WINDOWEVENT_CLOSE:
+                            running = 0;
+                            break;
+                        
+                        default:
+                        break;
+                    }
+                    break;
 
-    while (1) {
+                default:
+                    break;
+            }
+        }
         glClearColor ( 1.0, 0.0, 0.0, 1.0 );
         glClear ( GL_COLOR_BUFFER_BIT );
 
